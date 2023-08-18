@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-require('dotenv').config();
 const routes = require('./routes');
 const limiter = require('./middlewares/rate-limiter');
 const errorHandler = require('./middlewares/error-handler');
