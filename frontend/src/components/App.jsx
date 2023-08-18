@@ -174,9 +174,6 @@ export default function App() {
   }
 
   function handleSignOut() {
-    // localStorage.removeItem('userId');
-    // setIsLoggedIn(false);
-    // navigate('/sign-in', { replace: true });
     auth
     .signOut()
     .then(() => {
