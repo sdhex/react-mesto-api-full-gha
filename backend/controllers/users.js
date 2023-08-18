@@ -113,13 +113,13 @@ const login = async (req, res, next) => {
       throw new Unauthorized('Проверьте правильность ввода почты и пароля');
     }
     const token = jwt.sign(
-    {
-      _id: user._id,
-    },
-    NODE_ENV === 'production'
-      ? JWT_SECRET
-      : devSecret,
-    { expiresIn: '7d' },
+      {
+        _id: user._id,
+      },
+      NODE_ENV === 'production'
+        ? JWT_SECRET
+        : devSecret,
+      { expiresIn: '7d' },
     );
 
     const isPasswordMatched = await bcrypt.compare(password, user.password);
@@ -131,7 +131,7 @@ const login = async (req, res, next) => {
     return res.cookie('authToken', token, {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
-    }).send(user.toJSON());
+    }).send({ message: 'Выполнена авторизация' });
   } catch (err) {
     return next(err);
   }
@@ -140,7 +140,7 @@ const login = async (req, res, next) => {
 const signOut = async (req, res, next) => {
   try {
     await res.clearCookie('authToken');
-    return res.send({ message: 'Токен удалён' });
+    return res.send({ message: 'Выполнен выход' });
   } catch (err) {
     return next(err);
   }

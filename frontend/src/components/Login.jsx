@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import useForm from '../hooks/useForm';
 
