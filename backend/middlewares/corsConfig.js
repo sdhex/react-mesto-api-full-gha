@@ -4,7 +4,7 @@ const allowedCors = [
   'http://127.0.0.1:3001',
   'http://localhost:3001',
   'http://vmesto.nomoreparties.co',
-  'https://vmesto.nomoreparties.co'
+  'https://vmesto.nomoreparties.co',
 ];
 
 const corsConfig = (req, res, next) => {
