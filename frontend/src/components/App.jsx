@@ -37,16 +37,23 @@ export default function App() {
   const [cards, setCards] = React.useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState(null);
+  const [isAuthSuccess, setIsAuthSuccess] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    api
-      .getInitialData()
-      .then(([user, card]) => {
-        setCurrentUser(user);
-        setCards(card.reverse());
-      })
-      .catch(console.error);
-  }, []);
+    const token = localStorage.getItem('userId');
+    if (token) {
+      api
+        .getInitialData()
+        .then(([user, card]) => {
+          setCurrentUser(user);
+          setCards(card.reverse());
+        })
+        .catch(console.error);
+    }
+  }, [isLoggedIn]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -125,11 +132,6 @@ export default function App() {
     }
     handleSubmit(makeRequest);
   }
-
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
-  const [isAuthSuccess, setIsAuthSuccess] = React.useState(false);
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     const token = localStorage.getItem('userId');
