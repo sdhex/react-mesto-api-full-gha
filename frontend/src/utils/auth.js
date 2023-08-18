@@ -2,7 +2,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable arrow-body-style */
-const BASE_URL = 'http://127.0.0.1:3000';
+// const BASE_URL = 'http://127.0.0.1:3000';
+const BASE_URL = 'http://api.vmesto.nomoreparties.co';
 
 function checkResponse(res) {
   if (res.ok) {

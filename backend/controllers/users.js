@@ -1,9 +1,12 @@
+/* eslint-disable indent */
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const {
-  JWT_SECRET,
   CREATED,
+  NODE_ENV,
+  JWT_SECRET,
+  devSecret,
 } = require('../utils/constants');
 const BadRequest = require('../errors/badRequest');
 const NotFound = require('../errors/notFound');
@@ -109,7 +112,16 @@ const login = async (req, res, next) => {
     if (!user) {
       throw new Unauthorized('Проверьте правильность ввода почты и пароля');
     }
-    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign(
+    {
+      _id: user._id,
+    },
+    NODE_ENV === 'production'
+      ? JWT_SECRET
+      : devSecret,
+    { expiresIn: '7d' },
+    );
+
     const isPasswordMatched = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatched) {

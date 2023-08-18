@@ -1,12 +1,18 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../utils/constants');
+
+const { NODE_ENV, JWT_SECRET, devSecret } = require('../utils/constants');
 const Unauthorized = require('../errors/unauthorized');
 
 const auth = (req, res, next) => {
   const token = req.cookies.authToken;
   let payload;
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(
+      token,
+      NODE_ENV === 'production'
+        ? JWT_SECRET
+        : devSecret,
+    );
   } catch (err) {
     throw new Unauthorized('Ошибка токена');
   }

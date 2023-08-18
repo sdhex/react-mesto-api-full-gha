@@ -9,15 +9,14 @@ const limiter = require('./middlewares/rate-limiter');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/winston');
 const corsConfig = require('./middlewares/corsConfig');
-
-const { PORT = 3000 } = process.env;
+const { PORT, MONGODB } = require('./utils/constants');
 
 const app = express();
 app.use(express.json());
 app.use(corsConfig);
 app.use(cookieParser());
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(MONGODB, {
   useNewUrlParser: true,
 });
 
