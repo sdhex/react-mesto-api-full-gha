@@ -1,0 +1,7 @@
+const CREATED = 201;
+const JWT_SECRET = '289182493d0533e506633ff8287c22bcb3ae3825d92273e4f2d9653fa678105f';
+
+module.exports = {
+  CREATED,
+  JWT_SECRET,
+};
