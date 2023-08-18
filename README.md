@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.80.146
+IP 51.250.80.146
 
 Frontend https://vmesto.nomoreparties.co
 
